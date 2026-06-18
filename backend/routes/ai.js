@@ -17,32 +17,16 @@ async function callGemini(prompt) {
   if (!key) throw new Error('GEMINI_API_KEY is not configured on the server');
   const { GoogleGenerativeAI } = require('@google/generative-ai');
   const genAI = new GoogleGenerativeAI(key);
-
-  const models = [
-    'gemini-3-flash-preview',
-    'gemini-3.5-flash',
-    'gemini-2.5-flash',
-    'gemini-2.0-flash'
-  ];
-
-  let lastErr = null;
-  for (const modelName of models) {
-    try {
-      console.log(`Trying Gemini model: ${modelName}...`);
-      const model = genAI.getGenerativeModel({ model: modelName });
-      const result = await model.generateContent(prompt);
-      console.log(`Success with model: ${modelName}`);
-      return result.response.text();
-    } catch (err) {
-      console.error(`Failed with model ${modelName}:`, err.message);
-      lastErr = err;
+  const model = genAI.getGenerativeModel({ model: 'gemini-3-flash-preview' });
+  try {
+    const result = await model.generateContent(prompt);
+    return result.response.text();
+  } catch (err) {
+    if (err.message && err.message.includes('429')) {
+      throw new Error('RATE_LIMIT: Gemini API quota exceeded. Please wait a minute and try again, or replace GEMINI_API_KEY in backend/.env with a fresh key from https://aistudio.google.com/app/apikey');
     }
+    throw err;
   }
-
-  if (lastErr && lastErr.message && lastErr.message.includes('429')) {
-    throw new Error('RATE_LIMIT: Gemini API quota exceeded. Please wait a minute and try again, or replace GEMINI_API_KEY in backend/.env with a fresh key from https://aistudio.google.com/app/apikey');
-  }
-  throw lastErr || new Error('All Gemini models failed');
 }
 
 
