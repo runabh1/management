@@ -1,6 +1,6 @@
 # 🎓 SmartCampus — AI College Management System
 
-A full-stack college management system powered by **Gemini 2.0 Flash AI**, built with React + Tailwind CSS frontend and Node.js/Express backend with SQLite.
+A full-stack college management system powered by **Gemini -3- Flash-previewFlash AI**, built with React + Tailwind CSS frontend and Node.js/Express backend with SQLite.
 
 ---
 
@@ -12,7 +12,7 @@ A full-stack college management system powered by **Gemini 2.0 Flash AI**, built
 | **Faculty** | Mark attendance, post assignments, enter marks |
 | **Student** | View attendance/marks, submit assignments, AI Study Hub |
 
-### 🤖 AI Study Hub (Gemini 2.0 Flash)
+### 🤖 AI Study Hub (Gemini -3- Flash-previewFlash)
 - **Study Planner** — Personalized day-by-day exam schedules
 - **Notes Summarizer** — Paste text or upload PDF for instant key points
 - **Question Generator** — MCQ, short & long answer practice questions
@@ -108,7 +108,7 @@ cd frontend && npm run dev
 | Backend | Node.js + Express |
 | Database | Node.js 22 built-in `node:sqlite` (no native compilation) |
 | Auth | JWT + bcryptjs |
-| AI | Gemini 2.0 Flash (`@google/generative-ai`) |
+| AI | Gemini -3- Flash-previewFlash (`@google/generative-ai`) |
 
 > **Note on Database:** SQLite data is stored in `backend/smartcampus.db`. On Render's **free tier**, the filesystem resets on each deploy (data is re-seeded automatically). Upgrade to a **paid plan with a persistent disk** to retain data across deploys.
 
